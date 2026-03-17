@@ -1,0 +1,90 @@
+@import url("https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Google+Sans+Text:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap");
+
+:root {
+  /* Material You / M3 Color System - Google Premium */
+  --md-sys-color-primary: #1a73e8;
+  --md-sys-color-primary-light: #4285f4;
+  --md-sys-color-primary-dark: #1557b0;
+  --md-sys-color-on-primary: #ffffff;
+  --md-sys-color-primary-container: #d3e3fd;
+  --md-sys-color-on-primary-container: #041e49;
+
+  --md-sys-color-secondary: #00897b;
+  --md-sys-color-secondary-light: #26a69a;
+  --md-sys-color-tertiary: #f9ab00;
+  --md-sys-color-error: #c5221f;
+  --md-sys-color-success: #137333;
+
+  /* Dark Theme Surfaces - Refined Google Dark */
+  --md-sys-color-surface: #0f1318;
+  --md-sys-color-surface-dim: #0a0d10;
+  --md-sys-color-surface-bright: #181d24;
+  --md-sys-color-surface-container-lowest: #080a0d;
+  --md-sys-color-surface-container-low: #0f1318;
+  --md-sys-color-surface-container: #141920;
+  --md-sys-color-surface-container-high: #1a2028;
+  --md-sys-color-surface-container-highest: #212830;
+
+  --md-sys-color-on-surface: #e3e7ec;
+  --md-sys-color-on-surface-variant: #9aa0a6;
+  --md-sys-color-outline: #3c4043;
+  --md-sys-color-outline-variant: #2d3135;
+  --md-sys-color-surface-tint: rgba(26, 115, 232, 0.08);
+
+  /* Elevation overlays */
+  --md-elevation-1: 0 1px 2px rgba(0,0,0,0.3), 0 1px 3px 1px rgba(0,0,0,0.15);
+  --md-elevation-2: 0 1px 2px rgba(0,0,0,0.3), 0 2px 6px 2px rgba(0,0,0,0.15);
+  --md-elevation-3: 0 4px 8px 3px rgba(0,0,0,0.15), 0 1px 3px rgba(0,0,0,0.3);
+  --md-elevation-4: 0 6px 10px 4px rgba(0,0,0,0.15), 0 2px 3px rgba(0,0,0,0.3);
+  --md-elevation-5: 0 8px 12px 6px rgba(0,0,0,0.15), 0 4px 4px rgba(0,0,0,0.3);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  min-height: 100vh;
+}
+
+body {
+  font-family: 'Outfit', 'Google Sans Text', system-ui, sans-serif;
+  background: var(--md-sys-color-surface);
+  color: var(--md-sys-color-on-surface);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgba(26, 115, 232, 0.35);
+  color: #fff;
+}
+
+/* Premium Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--md-sys-color-outline);
+  border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--md-sys-color-on-surface-variant);
+  background-clip: content-box;
+}
+::-webkit-scrollbar-corner { background: transparent; }
+
+/* Focus States - M3 Style */
+:focus-visible {
+  outline: 2px solid var(--md-sys-color-primary);
+  outline-offset: 2px;
+}
+
+/* Smooth page transitions */
+html {
+  scroll-behavior: smooth;
+}
