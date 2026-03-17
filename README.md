@@ -4,101 +4,173 @@ A premium, Material Design 3 video downloader web app. Download videos from YouT
 
 **No ads · No tracking · Open source**
 
-Uses [Cobalt](https://github.com/imputnet/cobalt) as the processing backend.
+---
 
-## Features
+## Guía de Configuración Paso a Paso
 
-- Premium Material Design 3 UI (Google-style)
-- Dark/Light mode with system preference detection
-- Platform auto-detection (YouTube, Instagram, TikTok, Twitter/X, Reddit)
-- Advanced download options (quality, format, audio-only)
-- Responsive design
-- Glassmorphism effects and smooth animations
+### Paso 1: ¿Qué es Cobalt?
 
-## Quick Start
+Cobalt es el servicio que procesa y descarga los videos. Tu app se conecta a una "instancia" de Cobalt (un servidor) para funcionar.
 
-### 1. Install dependencies
+**No necesitas crear cuenta.** Solo necesitas la URL de una instancia pública.
+
+---
+
+### Paso 2: Obtener tu URL de Cobalt API
+
+#### Opción A: Usar una instancia pública (Recomendado - 2 minutos)
+
+1. Ve a **[instances.cobalt.best](https://instances.cobalt.best)**
+
+2. Verás una lista de servidores. Busca uno que tenga:
+   - ✅ **Status: Online** (punto verde)
+   - ✅ **API: Yes**
+   - ✅ **Auth: No** (sin autenticación)
+
+3. Haz clic en el servidor que elijas para ver sus detalles
+
+4. Copia la **API URL** (se ve algo así):
+   ```
+   https://api.cobalt.tools
+   ```
+   o
+   ```
+   https://cobalt.example.com
+   ```
+
+5. **¡Esa es tu `COBALT_API_URL`!** Guárdala.
+
+#### Opción B: Instancias recomendadas que suelen funcionar
+
+Si no quieres buscar, prueba estas (pueden cambiar con el tiempo):
+
+| Instancia | URL |
+|-----------|-----|
+| Oficial | `https://api.cobalt.tools` |
+
+> ⚠️ Las instancias públicas pueden tener límites de uso o estar caídas temporalmente. Si una no funciona, prueba otra.
+
+---
+
+### Paso 3: Verificar que la instancia funciona (Opcional)
+
+Antes de configurar Vercel, puedes probar que la instancia responde:
+
+1. Abre tu navegador
+2. Ve a la URL que copiaste, por ejemplo: `https://api.cobalt.tools`
+3. Deberías ver una respuesta JSON o una página de Cobalt
+4. Si ves un error, prueba otra instancia
+
+---
+
+### Paso 4: Deploy en Vercel
+
+1. **Ve a Vercel:**
+
+   👉 [https://vercel.com/new](https://vercel.com/new)
+
+2. **Conecta tu cuenta de GitHub** (si no lo has hecho)
+
+3. **Importa el repositorio:**
+   - Busca `antuansabe/videos`
+   - Click en **Import**
+
+4. **Configura la variable de entorno:**
+
+   En la sección **"Environment Variables"**, agrega:
+
+   | Name | Value |
+   |------|-------|
+   | `COBALT_API_URL` | `https://api.cobalt.tools` |
+
+   (O la URL que hayas elegido en el Paso 2)
+
+5. **Click en "Deploy"**
+
+6. **¡Espera 1-2 minutos y listo!** 🎉
+
+---
+
+### Paso 5: Probar tu app
+
+1. Vercel te dará una URL como: `https://videos-xxx.vercel.app`
+2. Ábrela en tu navegador
+3. Pega un link de YouTube, Instagram o TikTok
+4. Click en **Download**
+
+---
+
+## Solución de Problemas
+
+### "Error de conexión" o "API no configurada"
+
+- Verifica que escribiste bien `COBALT_API_URL` (sin espacios)
+- Asegúrate de que la URL no tenga `/` al final
+- Prueba otra instancia de [instances.cobalt.best](https://instances.cobalt.best)
+
+### "Error al procesar el enlace"
+
+- Algunas instancias no soportan todas las plataformas
+- Prueba con un video de YouTube (suele ser el más compatible)
+- Intenta con otra instancia
+
+### La instancia que elegí dejó de funcionar
+
+Las instancias públicas son mantenidas por voluntarios. Si una deja de funcionar:
+1. Ve a [instances.cobalt.best](https://instances.cobalt.best)
+2. Elige otra instancia online
+3. En Vercel: Settings → Environment Variables → Edita `COBALT_API_URL`
+4. Redeploy
+
+---
+
+## Desarrollo Local
 
 ```bash
+# Instalar dependencias
 npm install
-```
 
-### 2. Configure Cobalt API
+# Crear archivo de configuración
+cp .env.example .env.local
 
-You need a Cobalt API instance. Two options:
+# Editar .env.local y agregar tu COBALT_API_URL
+# COBALT_API_URL=https://api.cobalt.tools
 
-**Option A: Use a community instance**
-
-Visit [instances.cobalt.best](https://instances.cobalt.best) and find one that:
-- Is online
-- Doesn't require authentication (`auth: false`)
-- Supports the services you need (youtube, instagram, etc.)
-
-**Option B: Self-host (recommended for frequent use)**
-
-Follow the guide: [Run an instance](https://github.com/imputnet/cobalt/blob/main/docs/run-an-instance.md)
-
-### 3. Configure environment variables
-
-Edit `.env.local`:
-
-```
-COBALT_API_URL=https://your-cobalt-instance.example.com
-```
-
-> **Important:** Only use the base URL (no trailing `/`). The app POSTs directly to this URL.
-
-### 4. Run in development
-
-```bash
+# Iniciar servidor de desarrollo
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Abre [http://localhost:3000](http://localhost:3000)
 
-## Deploy to Vercel
+---
 
-### One-click deploy
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/YOUR_USERNAME/video-downloader&env=COBALT_API_URL&envDescription=URL%20of%20your%20Cobalt%20API%20instance)
-
-### Manual deploy
-
-1. Push the repo to GitHub
-2. Import the project at [vercel.com/new](https://vercel.com/new)
-3. In **Environment Variables**, add:
-   - `COBALT_API_URL` = your Cobalt instance URL
-4. Deploy
-
-The app is optimized for Vercel with security headers pre-configured.
-
-## Scripts
+## Scripts Disponibles
 
 ```bash
-npm run dev        # Development server
-npm run build      # Production build
-npm run start      # Production server
-npm test           # Run tests
-npm run test:watch # Run tests in watch mode
+npm run dev        # Servidor de desarrollo
+npm run build      # Build de producción
+npm run start      # Servidor de producción
+npm test           # Correr tests
 ```
+
+---
 
 ## Tech Stack
 
 - **Next.js 15** (App Router)
 - **React 19**
 - **MUI v6** (Material Design 3)
-- **Cobalt API** (video processing)
-- **Jest + React Testing Library** (testing)
+- **Cobalt API** (procesamiento de video)
 
-## Supported Platforms
+## Plataformas Soportadas
 
-YouTube, Instagram, TikTok, Twitter/X, Reddit, Pinterest, Facebook, SoundCloud, Twitch, Bluesky, Snapchat, and more.
+YouTube, Instagram, TikTok, Twitter/X, Reddit, Pinterest, Facebook, SoundCloud, Twitch, Bluesky, Snapchat, y más.
 
-Full list depends on your Cobalt instance configuration.
+---
 
-## License
+## Licencia
 
-MIT — Personal use.
+MIT — Uso personal.
 
 ---
 
